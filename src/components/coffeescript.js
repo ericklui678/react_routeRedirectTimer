@@ -11,26 +11,26 @@ export default class CoffeeScript extends Component {
   }
 
   componentDidMount() {
-    let timer = setInterval(this.tick, 1000);
-    this.setState({ timer });
-
-
+    console.log('mounting');
+    this.myInterval = setInterval(this.tick, 1000);
   }
 
-  componentWillUnount() {
-    this.clearInterval(this.state.timer);
+  componentWillUnmount() {
+    console.log('unmounting');
+    clearInterval(this.myInterval);
   }
 
   tick() {
+    console.log('counter in tick', this.state.counter);
     if (this.state.counter === 0) {
       this.props.history.push('/');
       return;
     }
-
     this.setState({ counter: this.state.counter - 1 });
   }
 
   render() {
+    console.log('rendered', this.state.counter);
     return (
       <div>
         CoffeeScript is a programming language that transcompiles to JavaScript, so we'll be redirectly back to JavaScript in {this.state.counter}
